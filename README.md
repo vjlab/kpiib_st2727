@@ -5,6 +5,8 @@ Core Genome Alignment
 
 Prepare the input files:
 
+./ROARYFormat.pl -f FNA/\*.fna -g GFF/\*gff
+
 
 
 Run Roary
