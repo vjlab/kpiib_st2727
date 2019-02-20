@@ -32,12 +32,12 @@ you can keep or drop tips that you wish. If variables keep and drop are NULL onl
 tips with unique branches are kept.
 
 R
-`source("Function.PruneLargeTRee.r")`
-`prune.Large.Tree(tree,keep,drop)`
+`source("Function.PruneLargeTRee.r")
+prune.Large.Tree(tree,keep,drop)`
 
-tree is a phylogenetic tree
-keep a vector with the tips
-
+tree: is a phylogenetic tree
+keep: a vector with tips to keep no matter if the length of the branch already exists
+drop: a vector with tips to avoid
 Calculating Evolutionary rate. LSD
 http://www.atgc-montpellier.fr/LSD/
 
