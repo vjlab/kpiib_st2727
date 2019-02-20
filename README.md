@@ -32,7 +32,7 @@ you can keep or drop tips that you wish. If variables keep and drop are NULL onl
 tips with unique branches are kept.
 
 R
-`source("Function.PruneLargeTRee.r")
+`source("Function.PruneLargeTRee.r")\n
 prune.Large.Tree(tree,keep,drop)`
 
 tree: is a phylogenetic tree
