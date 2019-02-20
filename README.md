@@ -6,7 +6,7 @@ https://sanger-pathogens.github.io/Roary/
 
 Prepare the input files for ROARY:
 
-./ROARYFormat.pl -f FNA/\*.fna -g GFF/\*.gff
+`./ROARYFormat.pl -f FNA/\*.fna -g GFF/\*.gff`
 
 ROARYFormat.pl concatenates the gff and fna files.
 
@@ -31,7 +31,7 @@ This R function prune the tree removing branches with repetitive lengths. Additi
 you can keep or drop tips that you wish. If variables keep and drop are NULL only the
 tips with unique branches are kept.
 
-R 
+R
 source("Function.PruneLargeTRee.r")
 
 prune.Large.Tree(tree,keep,drop)
