@@ -18,8 +18,8 @@ Run FastQC for all files
 
 You can have a detailed look by checking the graphical outputs of FastQC. However, if you want to have a fast look of only the problematic results, you can *grep* the word "FAIL" or "WARN" through the summary.txt outputs for all your files.
 
-grep "FAIL" \*fastQC.results/summary.txt
-grep "WARN" \*fastQC.results/summary.txt
+`grep "FAIL" \*fastQC.results/summary.txt`
+`grep "WARN" \*fastQC.results/summary.txt`
 
 If needed, trim the sequences using FastX-toolskit: http://hannonlab.cshl.edu/fastx_toolkit/download.html
 You can also do this in parallel running:
