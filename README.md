@@ -26,20 +26,20 @@ Run Roary
 `roary -f KlebsiellaCompleteGenomes -p 16 -e -n  -s -ap --group_limit 200000 -v GFF.FNA.ForROARY/\*gff`
 
 
-#Phylogeny Analysis
+# Phylogeny Analysis
 Run Phylogeny
 
 `raxmlHPC-PTHREADS-SSE3 -T 16 -f a -s KlebsiellaCompleteGenomes/core_gene_alignment.aln  -m GTRGAMMA  -x 12345 -p 12345 -# autoMRE -n KlebsiellaCompleteGenomesPhylo.GAMMA`
 
 
-#Metadata for all genomes
+# Metadata for all genomes
 ftp://ftp.ncbi.nlm.nih.gov/biosample/
 
 Parsing XML to get Metadata
 
 `./XML2Table.pl Biosample.files/\*xml >BioSampleKlebsiella.txt`
 
-#Post Processing Tree
+# Post Processing Tree
 
 Prune and plot tree
 
@@ -57,6 +57,6 @@ drop: a vector with tips to avoid
 Calculating Evolutionary rate. LSD
 http://www.atgc-montpellier.fr/LSD/
 
-#Time-Calibrated Tree
+# Time-Calibrated Tree
 
  `./lsd -i KpIIB.LSD.nwk -d Metadata.KpIIB.txt -c -v 1 -f 100 -s 500000`
