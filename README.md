@@ -1,6 +1,6 @@
 # Forensic genomics of Klebsiella from an NICU outbreak in China reveals patterns of genetic diversity, evolution and epidemiology
 
-Here we explain the bioinformatic steps for the characterization and evolution analysis of 22 isolates of Klebsiella. For those the characterization of virulent and resistant markers, as well as secretion systems was done. The evolutionary analysis included 4082 publicly available genomes of Klebsiella.
+Here we explain the bioinformatic steps for the characterization and evolution analysis of 22 isolates of Klebsiella. For those, the characterization of virulent and resistant markers, as well as secretion systems was done. The evolutionary analysis included 4082 publicly available genomes of Klebsiella.
 
 # Sequence data processing (Illumina paired-end)
 
@@ -25,18 +25,18 @@ You can have a detailed look by checking the graphical outputs of FastQC. Howeve
 If needed, trim the sequences using FastX-toolskit: http://hannonlab.cshl.edu/fastx_toolkit/download.html
 You can also do this in parallel running:
 
-`./Running_Arrayjobs.pl -p "fastx_trimmer -Q33 -f20 -v -i" -f ../RawData/\*fq -o fast.trimmer`
+`./Running_Arrayjobs.pl -p "fastx_trimmer -Q33 -f20 -v -i" -f ../RawData/\*fq -o fast.trimmer.fq`
 
 Between the quotes put the details of your trimming.
 
+Double check your quality running FastQC again.
+
+Use SPAdes to assemble: http://cab.spbu.ru/software/spades/
 
 
+`./RunningSPAdes.pl -f \*fast__trimmer.fq -p n -o SPAdesoutput`
 
 
-
-./Running_Arrayjobs.pl -f fq_fast.trimmer -p fastqc -o fastQC.aftertrimmer
-
-./Running_Arrayjobs.pl -f *fq_fast__trimmer.fq -p fastqc -o fastQC.aftertrimmer
 
 Generate the core genome alignment using ROARY
 https://sanger-pathogens.github.io/Roary/
