@@ -2,15 +2,40 @@
 
 Here we explain the bioinformatic steps for the characterization and evolution analysis of 22 isolates of Klebsiella. For those the characterization of virulent and resistant markers, as well as secretion systems was done. The evolutionary analysis included 4082 publicly available genomes of Klebsiella.
 
-# Sequence data processing (Illumina)
+# Sequence data processing (Illumina paired-end)
 
-1. Quality Control with Fastqc command line
+Quality Control with Fastqc command line
 
-Using the tool FastQC we determined the quality of the sequences. Here are the steps to run this parallel in a HPC machine.
+Using the tool FastQC we determined the quality of the sequences. Here are the steps to run this in parallel in a HPC machine with a queue system.
 
 You can find FastQC here: http://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc
 
-After installing FastQC,  
+After installing FastQC, use Running_Arrayjobs.pl to generate a individual job for each isolate. Download template_submit.txt file and put it in the same folder. Plese notice that template_submit.txt file should have the specifications of your machine. This example is for SLURM system, but can be change to SGE. Just have in mind to not delete the word PROGRAM on it.
+
+Run FastQC for all files
+
+`./Running_Arrayjobs.pl -f \*fq -p fastqc -o fastQC.results`
+
+You can have a detailed look by checking the graphical outputs of FastQC. However, if you want to have a fast look of only the problematic results, you can *grep* the word "FAIL" or "WARN" through the summary.txt outputs for all your files.
+
+grep "FAIL" \*fastQC.results/summary.txt
+grep "WARN" \*fastQC.results/summary.txt
+
+If needed, trim the sequences using FastX-toolskit: http://hannonlab.cshl.edu/fastx_toolkit/download.html
+You can also do this in parallel running:
+
+`./Running_Arrayjobs.pl -p "fastx_trimmer -Q33 -f20 -v -i" -f ../RawData/\*fq -o fast.trimmer`
+
+Between the quotes put the details of your trimming.
+
+
+
+
+
+
+./Running_Arrayjobs.pl -f fq_fast.trimmer -p fastqc -o fastQC.aftertrimmer
+
+./Running_Arrayjobs.pl -f *fq_fast__trimmer.fq -p fastqc -o fastQC.aftertrimmer
 
 Generate the core genome alignment using ROARY
 https://sanger-pathogens.github.io/Roary/
@@ -26,7 +51,7 @@ Run Roary
 `roary -f KlebsiellaCompleteGenomes -p 16 -e -n  -s -ap --group_limit 200000 -v GFF.FNA.ForROARY/\*gff`
 
 
-# Phylogeny Analysis
+# Phylogenetic Analysis
 Run Phylogeny
 
 `raxmlHPC-PTHREADS-SSE3 -T 16 -f a -s KlebsiellaCompleteGenomes/core_gene_alignment.aln  -m GTRGAMMA  -x 12345 -p 12345 -# autoMRE -n KlebsiellaCompleteGenomesPhylo.GAMMA`
