@@ -39,10 +39,13 @@ Use SPAdes to assemble: http://cab.spbu.ru/software/spades/
 Generating scaffoldings
 
 Medusa
+`java -jar medusa.jar -f ST2727reference/ -i KP1_1.fq_fast__trimmer.fq_SPAdesoutput.fasta -v `
 
 Organizing scaffoldings
 
 Mauve
+
+`java -Xmx500m -cp Mauve.jar org.gel.mauve.contigs.ContigOrderer -output KP9_ST23.CP030172.1 -ref  ST23.CP030172.1.fasta -draft KP9_1.fq_fast.trimmer_Velvetoutput.fa`
 
 # Download all genomes publicly available
 
@@ -63,7 +66,7 @@ source download_gff_files.sh
 
 # Phylogenetic Analysis
 
-Generate the core genome alignment using ROARY
+First generate the core genome alignment using ROARY
 https://sanger-pathogens.github.io/Roary/
 
 Prepare the input files for ROARY:
@@ -76,14 +79,15 @@ Run Roary
 
 `roary -f KlebsiellaCompleteGenomes -p 16 -e -n  -s -ap --group_limit 200000 -v GFF.FNA.ForROARY/\*gff`
 
-
 Run Phylogeny
 
 `raxmlHPC-PTHREADS-SSE3 -T 16 -f a -s KlebsiellaCompleteGenomes/core_gene_alignment.aln  -m GTRGAMMA  -x 12345 -p 12345 -# autoMRE -n KlebsiellaCompleteGenomesPhylo.GAMMA`
 
 
 # Metadata for all genomes
-ftp://ftp.ncbi.nlm.nih.gov/biosample/
+Get metadata information from the publicly available genomes
+
+wget ftp://ftp.ncbi.nlm.nih.gov/biosample/biosample_set.xml.gz
 
 Parsing XML to get Metadata
 
@@ -104,9 +108,9 @@ prune.Large.Tree(tree,keep,drop)`
 tree: is a phylogenetic tree
 keep: a vector with tips to keep no matter if the length of the branch already exists
 drop: a vector with tips to avoid
-Calculating Evolutionary rate. LSD
-http://www.atgc-montpellier.fr/LSD/
 
 # Time-Calibrated Tree
+
+Find the LSD program here: http://www.atgc-montpellier.fr/LSD/
 
  `./lsd -i KpIIB.LSD.nwk -d Metadata.KpIIB.txt -c -v 1 -f 100 -s 500000`
