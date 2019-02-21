@@ -36,7 +36,32 @@ Use SPAdes to assemble: http://cab.spbu.ru/software/spades/
 
 `./RunningSPAdes.pl -f \*fast__trimmer.fq -p n -o SPAdesoutput`
 
+Generating scaffoldings
 
+Medusa
+
+Organizing scaffoldings
+
+Mauve
+
+# Download all genomes publicly available
+
+http://www.metagenomics.wiki/tools/fastq/ncbi-ftp-genome-download
+
+`wget ftp://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt
+grep -E "Klebsiella" assembly_summary_refseq.txt | cut -f 8,9,14,15,16 >list
+grep -E "Klebsiella" assembly_summary_refseq.txt | cut -f 20 >ftp_folder.txt
+
+awk 'BEGIN{FS=OFS="/";filesuffix="genomic.fna.gz"}{ftpdir=$0;asm=$10;file=asm"\_"filesuffix;print "wget "ftpdir,file}' ftp_folder.txt > download_fna_files.sh
+
+awk 'BEGIN{FS=OFS="/";filesuffix="genomic.gff.gz"}{ftpdir=$0;asm=$10;file=asm"\_"filesuffix;print "wget "ftpdir,file}' ftp_folder.txt > download_gff_files.sh
+
+source download_fna_files.sh
+
+source download_gff_files.sh
+`
+
+# Phylogenetic Analysis
 
 Generate the core genome alignment using ROARY
 https://sanger-pathogens.github.io/Roary/
@@ -52,7 +77,6 @@ Run Roary
 `roary -f KlebsiellaCompleteGenomes -p 16 -e -n  -s -ap --group_limit 200000 -v GFF.FNA.ForROARY/\*gff`
 
 
-# Phylogenetic Analysis
 Run Phylogeny
 
 `raxmlHPC-PTHREADS-SSE3 -T 16 -f a -s KlebsiellaCompleteGenomes/core_gene_alignment.aln  -m GTRGAMMA  -x 12345 -p 12345 -# autoMRE -n KlebsiellaCompleteGenomesPhylo.GAMMA`
