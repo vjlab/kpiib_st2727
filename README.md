@@ -1,8 +1,8 @@
-#Forensic genomics of Klebsiella from an NICU outbreak in China reveals patterns of genetic diversity, evolution and epidemiology
+#Forensic genomics of Klebsiella from an NICU outbreak in China reveals patterns of genetic diversity, evolution and epidemiology#
 
 Here we explain the bioinformatic steps for the characterization and evolution analysis of 22 isolates of Klebsiella. For those the characterization of virulent and resistant markers, as well as secretion systems was done. The evolutionary analysis included 4082 publicly available genomes of Klebsiella.
 
-#Sequence data processing (Illumina)
+#Sequence data processing (Illumina)#
 
 1. Quality Control with Fastqc command line
 
