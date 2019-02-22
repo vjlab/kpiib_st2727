@@ -49,20 +49,20 @@ Mauve
 
 # Download all genomes publicly available
 
-http://www.metagenomics.wiki/tools/fastq/ncbi-ftp-genome-download
+source http://www.metagenomics.wiki/tools/fastq/ncbi-ftp-genome-download
 
-`wget ftp://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt
-grep -E "Klebsiella" assembly_summary_refseq.txt | cut -f 8,9,14,15,16 >list
-grep -E "Klebsiella" assembly_summary_refseq.txt | cut -f 20 >ftp_folder.txt
+`wget ftp://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt`
+`grep -E "Klebsiella" assembly_summary_refseq.txt | cut -f 8,9,14,15,16 >list`
+`grep -E "Klebsiella" assembly_summary_refseq.txt | cut -f 20 >ftp_folder.txt`
 
-awk 'BEGIN{FS=OFS="/";filesuffix="genomic.fna.gz"}{ftpdir=$0;asm=$10;file=asm"\_"filesuffix;print "wget "ftpdir,file}' ftp_folder.txt > download_fna_files.sh
+`awk 'BEGIN{FS=OFS="/";filesuffix="genomic.fna.gz"}{ftpdir=$0;asm=$10;file=asm"\_"filesuffix;print "wget "ftpdir,file}' ftp_folder.txt > download_fna_files.sh`
 
-awk 'BEGIN{FS=OFS="/";filesuffix="genomic.gff.gz"}{ftpdir=$0;asm=$10;file=asm"\_"filesuffix;print "wget "ftpdir,file}' ftp_folder.txt > download_gff_files.sh
+`awk 'BEGIN{FS=OFS="/";filesuffix="genomic.gff.gz"}{ftpdir=$0;asm=$10;file=asm"\_"filesuffix;print "wget "ftpdir,file}' ftp_folder.txt > download_gff_files.sh`
 
-source download_fna_files.sh
+`source download_fna_files.sh`
 
-source download_gff_files.sh
-`
+`source download_gff_files.sh`
+
 
 # Phylogenetic Analysis
 
