@@ -52,15 +52,13 @@ Steps to reproduce sequence data processing on a HPC machine with queue system.
 - Get metadata information from the publicly available genomes using `wget ftp://ftp.ncbi.nlm.nih.gov/biosample/biosample\_set.xml.gz`
 - Parsing XML to outbrain Metadata`./XML2Table.pl Biosample.files/\*xml >BioSampleKlebsiella.txt`
 
-### Post Processing Tree
-Prune trees with and plot using R function prune the tree removing branches with repetitive lengths. Additionally, tips can be dropped tips that you wish. If variables keep and drop are NULL only the tips with unique branches are kept.
+### Post Processing tree using R
 
-In R: 
 `source("Function.PruneLargeTRee.r")`
 `prune.Large.Tree(tree,keep,drop)`
 
-**tree**: is a phylogenetic tree; **keep**: a vector with tips to include, if if duplicates exists; **drop**: a vector with tips to ignore
-
+- **tree**: is a phylogenetic tree; **keep**: a vector with tips to include, even if duplicates exists; **drop**: a vector with tips to ignore
+- If variables keep and drop are NULL only the tips with unique branches are kept.
 ### Generating time-calibrated tree using [LSD][12]
  `./lsd -i KpIIB.LSD.nwk -d Metadata.KpIIB.txt -c -v 1 -f 100 -s 500000`
 
